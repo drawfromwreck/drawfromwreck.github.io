@@ -300,6 +300,234 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.namidame.tech/2020/10/10/C++ Const关键字用法总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="你很德布罗意">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="你很德布罗意的技术博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2020/10/10/C++ Const关键字用法总结/" itemprop="url">
+                  C++ Const关键字用法总结
+                </a>
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-10T19:39:46+08:00">
+                2020-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  299
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <table>
+<thead>
+<tr>
+<th style="text-align:center">用法</th>
+<th style="text-align:center">例子</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">const变量</td>
+<td style="text-align:center"><code>const int a;</code></td>
+<td style="text-align:left">不能改变值，必须初始化</td>
+</tr>
+<tr>
+<td style="text-align:center">const类变量</td>
+<td style="text-align:center"><code>const MyClass a;</code></td>
+<td style="text-align:left">不能修改成员变量，<b>不能调用非const函数</b></td>
+</tr>
+<tr>
+<td style="text-align:center">指向const变量的指针</td>
+<td style="text-align:center"><code>const int * a;</code></td>
+<td style="text-align:left">不能修改指向的内容，可以改变指向的对象</td>
+</tr>
+<tr>
+<td style="text-align:center">const指针</td>
+<td style="text-align:center"><code>int * const a;</code></td>
+<td style="text-align:left">可以修改指向的内容，不能改变指向的对象</td>
+</tr>
+<tr>
+<td style="text-align:center">指向const变量的const指针</td>
+<td style="text-align:center"><code>const int * const a;</code></td>
+<td style="text-align:left">不能修改指向的内容，也不能改变指向的对象<br>const引用</td>
+</tr>
+<tr>
+<td style="text-align:center">const变量作为函数参数</td>
+<td style="text-align:center"><code>void MyMethod(const int a);</code></td>
+<td style="text-align:left">函数体内不能修改其值，若是指向const变量的指针做参数，上层可通过一般指针调用</td>
+</tr>
+<tr>
+<td style="text-align:center">const返回值</td>
+<td style="text-align:center"><code>const int &amp; MyMethod();</code></td>
+<td style="text-align:left">返回const引用，上层不能通过此引用修改对象</td>
+</tr>
+<tr>
+<td style="text-align:center">const成员变量</td>
+<td style="text-align:center"><code>const int * a;</code> <br>  <code>static const int * a;</code></td>
+<td style="text-align:left">- 非静态的const成员变量必须在初始化列表里初始化，之后不能改变其值 <br> - 静态的const成员变量需要单独定义和初始化，不能在初始化列表里初始化</td>
+</tr>
+<tr>
+<td style="text-align:center">const成员函数</td>
+<td style="text-align:center"><code>void MyMethod() const;</code></td>
+<td style="text-align:left">函数体内的this指针为指向const对象的const指针，不能修改非mutable成员变量</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://www.namidame.tech/2020/10/10/数组指针和指针数组的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2107,7 +2335,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
